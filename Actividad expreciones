@@ -1,0 +1,132 @@
+import re
+
+# Expresión regular para validar direcciones de correo electrónico
+email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+
+def validar_correo(email):
+    if re.match(email_regex, email):
+        return "Válido"
+    else:
+        return "Inválido"
+
+correos = [
+    "ejemplo.usuario@gmail.com",      # Válido
+    "juan.sar@company.org",           # Válido
+    "contact@subdomain.ejemplo.com",  # Válido
+    "invalid-email@.com",             # Inválido
+    "hectormurcia@domain_with_underscore_.com", # Inválido
+    "user@domain..com",               # Inválido
+    "username@domain.c",              # Inválido (extensión demasiado corta)
+    "test.email+camilo@leetcode.com"    # Válido
+]
+
+for correo in correos:
+    resultado = validar_correo(correo)
+    print(f"Entrada: {correo} - Salida: {resultado}")
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+import re
+
+# Expresión regular para encontrar URLs
+url_regex = r'\bhttps?://[^\s]+'
+
+def encontrar_urls(texto):
+    urls = []
+    for match in re.finditer(url_regex, texto):
+        urls.append(match.group())
+    return urls
+
+# Ejemplo de texto
+texto = "Visita http://ejemplo.com o https://test.org para más información."
+
+# Encontrar URLs en el texto
+urls_encontradas = encontrar_urls(texto)
+print("URLs encontradas:", urls_encontradas)
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------
+
+
+
+import re
+
+# Expresión regular para extraer números (incluidos decimales)
+numero_regex = r'\b\d+(\.\d+)?\b'
+
+def extraer_numeros(texto):
+    numeros = [match.group() for match in re.finditer(numero_regex, texto)]
+    return numeros
+
+# Ejemplo de texto
+texto = "El total es 90.00 y el descuento es 9.85."
+
+# Extraer números del texto
+numeros_encontrados = extraer_numeros(texto)
+print("Números encontrados:", numeros_encontrados)
+
+----------------------------------------------------------------------------------------------------
+import re
+
+# Expresión regular para validar contraseñas fuertes
+password_regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@!#\$%^&*])[A-Za-z\d@!#\$%^&*]{8,}$'
+
+def verificar_contraseña(contraseña):
+    if re.match(password_regex, contraseña):
+        return "Válida"
+    else:
+        return "Inválida"
+
+# Nuevos ejemplos de contraseñas
+contraseñas = [
+    "A1b@c#d$",        # Válida (contiene letras mayúsculas, minúsculas, dígitos y caracteres especiales)
+    "12345678",        # Inválida (solo dígitos, falta letras y caracteres especiales)
+    "Abcdef1@",        # Inválida (solo 7 caracteres, falta uno para cumplir con el mínimo)
+    "Securidad#2024",     # Válida (contiene letras mayúsculas, minúsculas, dígitos y caracteres especiales)
+    "Short1$",         # Inválida (menos de 8 caracteres)
+    "ValidPass123!",   # Válida (contiene letras mayúsculas, minúsculas, dígitos y caracteres especiales)
+]
+
+for contraseña in contraseñas:
+    resultado = verificar_contraseña(contraseña)
+    print(f"Contraseña: {contraseña} - Salida: {resultado}")
+
+
+
+----------------------------------------------------------------------------------------------------
+
+
+
+import re
+
+# Expresión regular para encontrar palabras repetidas
+palabra_regex = r'\b(\b\w+\b)(?=.*\b\1\b)'
+
+def encontrar_palabras_repetidas(texto):
+    palabras_repetidas = set(match.group(1) for match in re.finditer(palabra_regex, texto))
+    return palabras_repetidas
+
+# Ejemplo de texto en español
+texto = "La casa es grande y la casa tiene un jardín grande."
+
+# Encontrar palabras repetidas en el texto
+palabras_repetidas = encontrar_palabras_repetidas(texto)
+print("Palabras repetidas:", palabras_repetidas)
+
+
+
+
+
+
